@@ -1,3 +1,31 @@
+class IntersectionEvents {
+	constructor(options) {
+		const defaults = {
+			root: null,
+			rootMargin: "0px 0px 0px 0px",
+			threshold: [0]
+		};
+		this.options = {...defaults, ...options};
+		this.observer = new IntersectionObserver(this.handle.bind(this), this.options);
+	}
+	watch(elem) {
+		this.observer.observe(elem);
+	}
+	handle(intersections, observer) {
+		for (let intersection of intersections) {
+			let evt = new CustomEvent("visible", {
+				bubbles: true,
+				cancelable: false,
+				detail: {
+					intersection: intersection,
+					observer: observer,
+				},
+			});
+			intersection.target.dispatchEvent(evt);
+		}
+	}
+}
+
 class DragScroller {
 	constructor(container, handler) {
 		this.container = container;
@@ -58,6 +86,7 @@ class InteractiveTimeline {
 		this.sliderElement = this.rootElement.querySelector(config.slider);
 		this.overviewElement = this.rootElement.querySelector(config.overview);
 		this.sliderPages = [...this.sliderElement.querySelectorAll(config.pages)];
+		this.eventCards = [...this.sliderElement.querySelectorAll(config.events)];
 		this.thumbnailPages = [...this.overviewElement.querySelectorAll(config.pages)];
 		this.enlargeButton = this.rootElement.querySelector(config.enlarge);
 		this.backButton = this.rootElement.querySelector(config.back);
@@ -80,11 +109,20 @@ class InteractiveTimeline {
 		/* main drag controls */
 		this.sliderScroller = new DragScroller(this.sliderElement, this.onSliderScrolled.bind(this));
 		this.overviewScroller = new DragScroller(this.overviewElement, this.onOverviewScrolled.bind(this));
-		
-		/* handle thumnail clicks */
-		for (let page of this.sliderPages) {
-			page.addEventListener("click", this.onSliderPageClick.bind(this, page));
+
+		/* intersections
+		this.intersectionsEvents = new IntersectionEvents();
+		for (let card of this.eventCards) {
+			this.intersectionsEvents.watch(card);
+			card.addEventListener("visible", this.onPageRevealed.bind(this, card));
 		}
+		for (let page of this.sliderPages) {
+			this.intersectionsEvents.watch(page);
+			page.addEventListener("visible", this.onPageRevealed.bind(this, page));
+		}
+		*/
+
+		/* handle thumnail clicks */
 		for (let page of this.thumbnailPages) {
 			page.addEventListener("click", this.onThumbnailPageClick.bind(this, page));
 		}
@@ -144,8 +182,8 @@ class InteractiveTimeline {
 		}
 	}
 
-	onSliderPageClick(page, evt) {
-		evt.preventDefault();
+	onPageRevealed(page, evt) {
+		page.setAttribute('data-visible', evt.detail.intersection.isIntersecting);
 	}
 
 	onThumbnailPageClick(page, evt) {
@@ -192,6 +230,7 @@ window.interactiveTimeline = new InteractiveTimeline({
 	slider: ".it-slider",
 	overview: ".it-overview",
 	pages: ".it-slide, .it-thumbnail",
+	events: ".it-events li",
 	enlarge: ".it-enlarge",
 	back: ".it-back",
 	forward: ".it-forward",
