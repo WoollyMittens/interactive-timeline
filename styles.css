@@ -93,6 +93,7 @@
 }
 .it-overview {
 	display: flex;
+	justify-content: center;
 	gap: 0.5rem;
 	overflow: auto;
 	scrollbar-width: none;
