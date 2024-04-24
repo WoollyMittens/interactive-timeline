@@ -95,7 +95,7 @@
 
 .it-title h2 {
 	opacity: 0;
-	transform: opacity ease 300ms;
+	transition: opacity ease 300ms;
 	position: absolute;
 }
 
