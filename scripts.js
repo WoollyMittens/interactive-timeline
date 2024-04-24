@@ -67,10 +67,10 @@ class InteractiveTimeline {
 		
 		/* keep track of the focus */
 		this.focusElement = null;
-//		this.sliderElement.addEventListener('mouseover', () => { this.focusElement = this.sliderElement });
-//		this.sliderElement.addEventListener('touchstart', () => { this.focusElement = this.sliderElement });
-//		this.overviewElement.addEventListener('mouseover', () => { this.focusElement = this.overviewElement });
-//		this.overviewElement.addEventListener('touchstart', () => { this.focusElement = this.overviewElement });
+		this.sliderElement.addEventListener('mouseover', () => { this.focusElement = this.sliderElement });
+		this.sliderElement.addEventListener('touchstart', () => { this.focusElement = this.sliderElement });
+		this.overviewElement.addEventListener('mouseover', () => { this.focusElement = this.overviewElement });
+		this.overviewElement.addEventListener('touchstart', () => { this.focusElement = this.overviewElement });
 		
 		/* click controls */
 		this.enlargeButton.addEventListener("click", this.onBreakOut.bind(this));
