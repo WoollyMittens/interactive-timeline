@@ -58,6 +58,7 @@
 	margin: 0;
 	padding: 0 2rem;
 	min-height: 16rem;
+	list-style: none;
 }
 .it-events li {
 	background-color: rgba(0,0,0,0.75);

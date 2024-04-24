@@ -164,7 +164,7 @@ class InteractiveTimeline {
 			this.thumbnailPages[this.closestIndex].scrollIntoView({ behavior: "instant", block: "nearest", inline: "center" });
 		} else {
 			this.focusElement = this.sliderElement;
-			setTimeout(() => { element.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }) }, 100);
+			setTimeout(() => { element.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" }) }, 100);
 		}
 	}
 
