@@ -166,7 +166,7 @@ class InteractiveTimeline {
 				const closestSlide = this.findClosestSlide(this.sliderElement, this.sliderPages);
 				this.closestIndex = this.sliderPages.indexOf(closestSlide);
 				this.thumbnailPages[this.closestIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-			}, 500);
+			}, 100);
 		}
 	}
 
@@ -178,7 +178,7 @@ class InteractiveTimeline {
 				const closestThumbnail = this.findClosestSlide(this.overviewElement, this.thumbnailPages);
 				this.closestIndex = this.thumbnailPages.indexOf(closestThumbnail);
 				this.sliderPages[this.closestIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-			}, 300);
+			}, 100);
 		}
 	}
 

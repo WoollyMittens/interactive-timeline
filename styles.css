@@ -5,50 +5,61 @@
 	position: relative;
 	transition: background-color ease 500ms;
 }
+
 [data-breakout="true"] {
 	width: 100vw;
 	left: 50%;
 	transform: translateX(-50%);
 }
+
 [data-index="0"] {
 	background-color: rgba(255,0,0,0.1);
 }
+
 [data-index="1"] {
 	background-color: rgba(0,255,0,0.1);
 }
+
 [data-index="2"] {
 	background-color: rgba(0,0,255,0.1);
 }
+
 [data-index="3"] {
 	background-color: rgba(0,255,255,0.1);
 }
+
 [data-index="4"] {
 	background-color: rgba(255,0,255,0.1);
 }
+
 [data-index="5"] {
 	background-color: rgba(255,255,0,0.1);
 }
+
 [data-index="6"] {
 	background-color: rgba(0,0,0,0.1);
 }
+
 .it-timeline * {
 	box-sizing: border-box;
 }
+
 .it-slider {
 	display: flex;
 	overflow: auto;
 	scrollbar-width: none;
 	min-height: 32rem;
 }
+
 .it-slide {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	height: 100%;
-	scroll-snap-align: center;
 	box-shadow: inset 0 0 1px red;
 	padding: 10rem 0 8rem;
 }
+
 .it-events {
 	display: flex;
 	align-items: flex-start;
@@ -60,6 +71,7 @@
 	min-height: 16rem;
 	list-style: none;
 }
+
 .it-events li {
 	background-color: rgba(0,0,0,0.75);
 	color: #fff;
@@ -68,33 +80,42 @@
 	padding: 1.25rem;
 	margin: 1.5rem 0 0 0;
 }
+
 .it-events h3 {}
+
 .it-events p {}
+
 .it-overlay {}
+
 .it-title {
 	position: absolute;
 	left: 1rem;
 	top: 1rem;
 }
+
 .it-controls {}
+
 .it-enlarge {
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
 }
+
 .it-back {
 	position: absolute;
 	left: 1rem;
 	bottom: 1rem;
 }
+
 .it-forward {
 	position: absolute;
 	left: 5rem;
 	bottom: 1rem;
 }
+
 .it-overview {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: 0.5rem;
 	overflow: auto;
 	scrollbar-width: none;
@@ -108,13 +129,20 @@
 	box-shadow: inset 0 0 1px red;
 	list-style: none;
 }
+
+@media only screen and (min-width:992px) {
+	.it-overview {
+		justify-content: center;
+	}
+}
+
 .it-thumbnail {
 	background-color: #fff;
 	height: 100%;
 	aspect-ratio: 10 / 6;
-	scroll-snap-align: center;
 	box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.55);
 }
+
 [data-index="0"] .it-thumbnail:nth-of-type(1),
 [data-index="1"] .it-thumbnail:nth-of-type(2),
 [data-index="2"] .it-thumbnail:nth-of-type(3),
