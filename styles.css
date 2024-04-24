@@ -63,7 +63,8 @@
 .it-events li {
 	background-color: rgba(0,0,0,0.75);
 	color: #fff;
-	min-width: 20rem;
+	width: 20rem;
+	max-width: 90vw;
 	padding: 1.25rem;
 	margin: 1.5rem 0 0 0;
 }
