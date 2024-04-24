@@ -65,7 +65,7 @@
 	align-items: flex-start;
 	justify-content: space-around;
 	gap: 2rem;
-	border-top: solid 1px #fff;
+	border-top: solid 0.125rem #fff;
 	margin: 0;
 	padding: 0 2rem;
 	min-height: 16rem;
@@ -91,6 +91,22 @@
 	position: absolute;
 	left: 1rem;
 	top: 1rem;
+}
+
+.it-title h2 {
+	opacity: 0;
+	transform: opacity ease 300ms;
+	position: absolute;
+}
+
+[data-index="0"] .it-title h2[data-title="0"],
+[data-index="1"] .it-title h2[data-title="1"],
+[data-index="2"] .it-title h2[data-title="2"],
+[data-index="3"] .it-title h2[data-title="3"],
+[data-index="4"] .it-title h2[data-title="4"],
+[data-index="5"] .it-title h2[data-title="5"],
+[data-index="6"] .it-title h2[data-title="6"] {
+	opacity: 1;
 }
 
 .it-controls {}
