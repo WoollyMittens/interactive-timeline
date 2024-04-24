@@ -39,15 +39,41 @@
 	display: flex;
 	overflow: auto;
 	scrollbar-width: none;
+	min-height: 32rem;
 }
 .it-slide {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 	height: 100%;
-	aspect-ratio: 16 / 9;
 	scroll-snap-align: center;
 	box-shadow: inset 0 0 1px red;
-	padding: 4rem;
+	padding: 2rem 0;
 }
+.it-cards {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-around;
+	gap: 2rem;
+	border-top: solid 1px #fff;
+	margin: 0;
+	padding: 0 2rem;
+}
+.it-cards li {
+	background-color: rgba(0,0,0,0.75);
+	color: #fff;
+	min-width: 22rem;
+	padding: 1.25rem;
+	margin: 1.5rem 0 0 0;
+}
+.it-cards h3 {}
+.it-cards p {}
 .it-overlay {}
+.it-title {
+	position: absolute;
+	left: 1rem;
+	top: 1rem;
+}
 .it-controls {}
 .it-enlarge {
 	position: absolute;
