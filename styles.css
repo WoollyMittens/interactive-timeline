@@ -2,7 +2,6 @@
 	display: flex;
 	overflow: hidden;
 	width: 100%;
-	aspect-ratio: 16 / 9;
 	position: relative;
 	transition: background-color ease 500ms;
 }
@@ -48,9 +47,9 @@
 	height: 100%;
 	scroll-snap-align: center;
 	box-shadow: inset 0 0 1px red;
-	padding: 2rem 0;
+	padding: 10rem 0 8rem;
 }
-.it-cards {
+.it-events {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-around;
@@ -58,16 +57,17 @@
 	border-top: solid 1px #fff;
 	margin: 0;
 	padding: 0 2rem;
+	min-height: 16rem;
 }
-.it-cards li {
+.it-events li {
 	background-color: rgba(0,0,0,0.75);
 	color: #fff;
 	min-width: 22rem;
 	padding: 1.25rem;
 	margin: 1.5rem 0 0 0;
 }
-.it-cards h3 {}
-.it-cards p {}
+.it-events h3 {}
+.it-events p {}
 .it-overlay {}
 .it-title {
 	position: absolute;
@@ -92,22 +92,22 @@
 }
 .it-overview {
 	display: flex;
-	gap: 1rem;
+	gap: 0.5rem;
 	overflow: auto;
 	scrollbar-width: none;
 	position: absolute;
-	right: 1rem;
-	bottom: 1rem;
-	width: 66.667%;
-	height: 10rem;
+	left: 12.5%;
+	right: 12.5%;
+	bottom: 2.75rem;
+	height: 3.75rem;
 	margin: 0;
-	padding: 1rem;
+	padding: 0;
 	box-shadow: inset 0 0 1px red;
 	list-style: none;
 }
 .it-thumbnail {
 	height: 100%;
-	aspect-ratio: 16 / 9;
+	aspect-ratio: 10 / 6;
 	scroll-snap-align: center;
 	box-shadow: inset 0 0 1px red;
 }
