@@ -198,7 +198,7 @@ class InteractiveTimeline {
 		if (instant) {
 			const closestSlide = this.findClosestSlide(element, this.sliderPages);
 			this.closestIndex = this.sliderPages.indexOf(closestSlide);
-			element.scrollIntoView({ behavior: "instant", block: "nearest", inline: "center" });
+			element.scrollIntoView({ behavior: "instant", block: "nearest", inline: "start" });
 			this.thumbnailPages[this.closestIndex].scrollIntoView({ behavior: "instant", block: "nearest", inline: "center" });
 		} else {
 			this.focusElement = this.sliderElement;
