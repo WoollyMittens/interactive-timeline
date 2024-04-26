@@ -87,6 +87,13 @@
 
 .it-overlay {}
 
+.it-instructions {
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	z-index: 10;
+}
+
 .it-title {
 	position: absolute;
 	left: 1rem;
