@@ -229,8 +229,8 @@
 [data-index="4"] .it-thumbnail:nth-of-type(5),
 [data-index="5"] .it-thumbnail:nth-of-type(6),
 [data-index="6"] .it-thumbnail:nth-of-type(7),
-[data-index="6"] .it-thumbnail:nth-of-type(8),
-[data-index="6"] .it-thumbnail:nth-of-type(9),
-[data-index="6"] .it-thumbnail:nth-of-type(10) {
+[data-index="7"] .it-thumbnail:nth-of-type(8),
+[data-index="8"] .it-thumbnail:nth-of-type(9),
+[data-index="9"] .it-thumbnail:nth-of-type(10) {
 	background-color: #808080;
 }
