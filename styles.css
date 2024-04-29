@@ -52,7 +52,6 @@
 @media (pointer:fine) {
 	.it-slider {
 		scroll-snap-type: initial;
-		scroll-padding-left: initial;
 	}
 }
 
@@ -78,13 +77,21 @@
 	padding: var(--top-margin) 0 var(--bottom-margin);
 }
 
+.it-slide:first-of-type {
+	padding-left: var(--horizontal-margin);
+}
+
+.it-slide:last-of-type {
+	padding-right: var(--horizontal-margin);
+}
+
 .it-events {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-around;
 	gap: 2rem;
 	margin: 1rem 0 0 0;
-	padding: 0 var(--horizontal-margin);
+	padding: 0 2rem 0 0;
 	min-height: 16rem;
 	list-style: none;
 }
