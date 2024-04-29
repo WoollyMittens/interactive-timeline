@@ -54,6 +54,7 @@
 	overflow: auto;
 	scrollbar-width: none;
 	aspect-ratio: 1320 / 790;
+	cursor: grab;
 }
 
 .it-slide {
@@ -147,7 +148,7 @@
 	top: 3.75rem;
 	height: 5.25rem;
 	width: 13rem;
-	z-index: 30;
+	z-index: 15;
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -156,6 +157,27 @@
 	border-radius: 2.8125rem 0 0 2.8125rem;
 	padding: 0 1rem;
 }
+
+[data-interacted] .it-instructions {
+	animation-duration: 300ms;
+	animation-name: slideout;
+	animation-fill-mode: forwards;
+}
+
+@keyframes slideout {
+	from {
+	  transform: translate3d(0, 0, 0);
+	}
+
+	99% {
+		transform: translate3d(100%, 0, 0);
+	}
+  
+	to {
+		transform: translate3d(100%, 0, 0);
+		display: none;
+	}
+  }
 
 .it-instructions-fallback {
 	width: 56px;
@@ -173,7 +195,7 @@
 	top: 1.5rem;
 	right: 12rem;
 	height: 7.5rem;
-	z-index: 30;
+	z-index: 15;
 }
 
 .it-title h2 {

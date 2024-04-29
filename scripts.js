@@ -33,26 +33,31 @@ addEventListener("DOMContentLoaded", function() {
 	}
 
 	class DragScroller {
-		constructor(container, handler) {
+		constructor(container, handler, report) {
 			this.container = container;
 			this.handler = handler;
+			this.report = report || function(){};
 			this.previous = null;
 			this.distance = 0;
 			this.inertia = 0;
 			this.timeout = null;
-			this.container.addEventListener("mousedown", this.onPickupScroller.bind(this));
-			this.container.addEventListener("mousemove", this.onDragScroller.bind(this));
-			document.body.addEventListener("mouseup", this.onDropScroller.bind(this));
-			this.container.addEventListener("scroll", this.onManualScroller.bind(this), { passive: true });
-		}
-
-		onPickupScroller(evt) {
-			if (window.matchMedia("(pointer:fine)")) {
-				this.previous = evt.clientX;
+			if (window.matchMedia("(pointer:fine)").matches) {
+				this.container.addEventListener("mousedown", this.onDragStart.bind(this));
+				this.container.addEventListener("mousemove", this.onDragMove_mouse.bind(this));
+				document.body.addEventListener("mouseup", this.onDragEnd.bind(this));
+			} else {
+				this.container.addEventListener("touchstart", this.onDragStart.bind(this));
+				this.container.addEventListener("touchmove", this.onDragMove_touch.bind(this));
+				document.body.addEventListener("touchend", this.onDragEnd.bind(this));
 			}
+			this.container.addEventListener("scroll", this.onScroll.bind(this), { passive: true });
 		}
 
-		onDragScroller(evt) {
+		onDragStart(evt) {
+			this.previous = evt.clientX || evt.touches[0].clientX;
+		}
+
+		onDragMove_mouse(evt) {
 			if (this.previous !== null) {
 				evt.preventDefault(evt);
 				let current = evt.clientX;
@@ -61,19 +66,28 @@ addEventListener("DOMContentLoaded", function() {
 				this.inertia = offset;
 				this.distance += offset;
 				this.previous = current;
+				this.report(evt, this.distance);
 			}
 		}
 
-		onDropScroller(evt) {
-			if (window.matchMedia("(pointer:fine)")) {
-				this.decayScroll();
+		onDragMove_touch(evt) {
+			if (this.previous !== null) {
+				let current = evt.touches[0].clientX;
+				let offset = current - this.previous;
+				this.distance += offset;
+				this.previous = current;
+				this.report(evt, this.distance);
 			}
+		}
+
+		onDragEnd(evt) {
+			this.decayScroll();
 			this.previous = null;
 			this.distance = 0;
 		}
 
-		onManualScroller(evt) {
-			this.handler(this.container, evt);
+		onScroll(evt) {
+			this.handler(evt);
 		}
 
 		decayScroll() {
@@ -100,13 +114,7 @@ addEventListener("DOMContentLoaded", function() {
 			this.instructions = this.rootElement.querySelector(config.instructions);
 			this.sliderTimeout = null;
 			this.overviewTimeout = null;
-			
-			/* keep track of the focus */
 			this.focusElement = null;
-			this.sliderElement.addEventListener('mouseover', () => { this.focusElement = this.sliderElement });
-			this.sliderElement.addEventListener('touchstart', () => { this.focusElement = this.sliderElement });
-			this.overviewElement.addEventListener('mouseover', () => { this.focusElement = this.overviewElement });
-			this.overviewElement.addEventListener('touchstart', () => { this.focusElement = this.overviewElement });
 			
 			/* click controls */
 			this.enlargeButton.addEventListener("click", this.onBreakOut.bind(this));
@@ -114,8 +122,14 @@ addEventListener("DOMContentLoaded", function() {
 			this.forwardButton.addEventListener("click", this.onNextPage.bind(this));
 			
 			/* main drag controls */
-			this.sliderScroller = new DragScroller(this.sliderElement, this.onSliderScrolled.bind(this));
+			this.sliderScroller = new DragScroller(this.sliderElement, this.onSliderScrolled.bind(this), this.onScrollReported.bind(this));
 			this.overviewScroller = new DragScroller(this.overviewElement, this.onOverviewScrolled.bind(this));
+
+			/* keep track of focus */
+			this.sliderElement.addEventListener("mouseover", () => { this.focusElement = this.sliderElement; });
+			this.sliderElement.addEventListener("touchmove", () => { this.focusElement = this.sliderElement; });
+			this.overviewElement.addEventListener("mouseover", () => { this.focusElement = this.overviewElement; });
+			this.overviewElement.addEventListener("touchmove", () => { this.focusElement = this.overviewElement; });
 
 			/* intersections
 			this.intersectionsEvents = new IntersectionEvents();
@@ -138,7 +152,7 @@ addEventListener("DOMContentLoaded", function() {
 			this.focusOnPage(this.sliderPages[this.closestIndex], true);
 
 			/* import the animations */
-			this.instructions.setAttribute("src", "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config.animation)));
+			this.instructions.setAttribute("src", `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(config.animation))}`);
 			for (let prerequisite of config.prerequisites) {
 				let scriptElement = document.createElement("script");
 				scriptElement.setAttribute("src", prerequisite);
@@ -152,6 +166,14 @@ addEventListener("DOMContentLoaded", function() {
 
 		set closestIndex(value) {
 			this.rootElement.setAttribute('data-index', value);
+		}
+
+		get hasInteracted() {
+			return this.rootElement.hasAttribute('data-interacted');
+		}
+
+		set hasInteracted(value) {
+			this.rootElement.setAttribute('data-interacted', value);
 		}
 
 		onBreakOut(evt) {
@@ -174,27 +196,40 @@ addEventListener("DOMContentLoaded", function() {
 			this.focusOnPage(this.sliderPages[nextIndex]);
 		}
 
-		onSliderScrolled() {
-			clearTimeout(this.sliderTimeout);
-			if (this.focusElement === this.sliderElement) {
-				this.sliderTimeout = setTimeout(() => {
-					const closestSlide = this.findClosestSlide(this.sliderElement, this.sliderPages);
-					this.closestIndex = this.sliderPages.indexOf(closestSlide);
-					this.thumbnailPages[this.closestIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-				}, 100);
+		onScrollReported(evt, distance) {
+			if (!this.hasInteracted) {
+				this.hasInteracted = "";
 			}
 		}
 
-		onOverviewScrolled() {
+		onSliderScrolled(evt) {
+			clearTimeout(this.sliderTimeout);
+			this.sliderTimeout = setTimeout(() => {
+				const closestSlide = this.findClosestSlide(this.sliderElement, this.sliderPages);
+				this.closestIndex = this.sliderPages.indexOf(closestSlide);
+				if (evt.target === this.focusElement) {
+					this.thumbnailPages[this.closestIndex].scrollIntoView({
+						behavior: "smooth", 
+						block: "nearest", 
+						inline: "center" 
+					});
+				}
+			}, 100);
+		}
+
+		onOverviewScrolled(evt) {
 			clearTimeout(this.overviewTimeout);
-			if (this.focusElement === this.overviewElement) {
-				this.overviewTimeout = setTimeout(() => {
-					console.log('this.focusElement', this.focusElement);
-					const closestThumbnail = this.findClosestSlide(this.overviewElement, this.thumbnailPages);
-					this.closestIndex = this.thumbnailPages.indexOf(closestThumbnail);
-					this.sliderPages[this.closestIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-				}, 100);
-			}
+			this.overviewTimeout = setTimeout(() => {
+				const closestThumbnail = this.findClosestSlide(this.overviewElement, this.thumbnailPages);
+				this.closestIndex = this.thumbnailPages.indexOf(closestThumbnail);
+				if (evt.target === this.focusElement) {
+					this.sliderPages[this.closestIndex].scrollIntoView({ 
+						behavior: "smooth", 
+						block: "nearest", 
+						inline: "start" 
+					});
+				}
+			}, 100);
 		}
 
 		onPageRevealed(page, evt) {
@@ -213,11 +248,22 @@ addEventListener("DOMContentLoaded", function() {
 			if (instant) {
 				const closestSlide = this.findClosestSlide(element, this.sliderPages);
 				this.closestIndex = this.sliderPages.indexOf(closestSlide);
-				element.scrollIntoView({ behavior: "instant", block: "nearest", inline: "start" });
-				this.thumbnailPages[this.closestIndex].scrollIntoView({ behavior: "instant", block: "nearest", inline: "center" });
+				element.scrollIntoView({
+					behavior: "instant", 
+					block: "nearest", 
+					inline: "start"
+				});
+				this.thumbnailPages[this.closestIndex].scrollIntoView({
+					behavior: "instant", 
+					block: "nearest", 
+					inline: "center"
+				});
 			} else {
-				this.focusElement = this.sliderElement;
-				setTimeout(() => { element.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" }) }, 100);
+				setTimeout(() => {element.scrollIntoView({ 
+					behavior: "smooth", 
+					block: "nearest",
+					inline: "start" 
+				})}, 100);
 			}
 		}
 
