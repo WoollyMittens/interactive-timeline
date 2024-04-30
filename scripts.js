@@ -68,6 +68,7 @@ addEventListener("DOMContentLoaded", function() {
 		}
 
 		snapScroll(direction) {
+			if (direction === 0) return;
 			const containerRect = this.container.getBoundingClientRect();
 			let increment = (direction > 0) ? -1 : 1;
 			let index = (increment < 0) ? this.increments.length : -1 ;
