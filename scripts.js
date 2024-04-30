@@ -74,7 +74,7 @@ addEventListener("DOMContentLoaded", function() {
 			let index = (increment < 0) ? this.increments.length : -1 ;
 			let nearest = this.container.scrollWidth;
 			let distance = nearest;
-			while (Math.abs(distance) <= Math.abs(nearest) /*&& Math.sign(direction) !== Math.sign(distance)*/) {
+			while (Math.abs(distance) <= Math.abs(nearest)) {
 				index = index + increment;
 				nearest = distance;
 				let incrementRect = this.increments[index].getBoundingClientRect();
