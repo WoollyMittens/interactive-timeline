@@ -23,6 +23,7 @@
 .it-timeline {
 	display: flex;
 	overflow: hidden;
+	clip-path: polygon(0,0 100%,0 100%,100% 0,100%);
 	width: 100%;
 	position: relative;
 	transition: background-color ease 500ms;

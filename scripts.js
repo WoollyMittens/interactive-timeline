@@ -57,8 +57,8 @@ addEventListener("DOMContentLoaded", function() {
 		}
 
 		onDragEnd(evt) {
-			if (this.increments) { this.snapScroll(evt) } 
-			else { this.decayScroll(evt) }
+			if (this.increments) { this.snapScroll(this.distance, evt) } 
+			else { this.decayScroll(this.distance, evt) }
 			this.previous = null;
 			this.distance = 0;
 		}
@@ -67,21 +67,22 @@ addEventListener("DOMContentLoaded", function() {
 			this.scrollHandler(evt);
 		}
 
-		snapScroll() {
+		snapScroll(direction) {
 			const containerRect = this.container.getBoundingClientRect();
-			let index = -1;
+			let increment = (direction > 0) ? -1 : 1;
+			let index = (increment < 0) ? this.increments.length : -1 ;
 			let nearest = this.container.scrollWidth;
-			let distance = this.container.scrollWidth;
-			while (distance <= nearest) {
-				index += 1;
+			let distance = nearest;
+			while (Math.abs(distance) <= Math.abs(nearest) /*&& Math.sign(direction) !== Math.sign(distance)*/) {
+				index = index + increment;
 				nearest = distance;
 				let incrementRect = this.increments[index].getBoundingClientRect();
 				distance = (this.snap.inline === "start") ?
-					Math.abs(incrementRect.left - containerRect.left):
-					Math.abs((incrementRect.left + incrementRect.width / 2) - (containerRect.left + containerRect.width / 2));
+					incrementRect.left - containerRect.left:
+					(incrementRect.left + incrementRect.width / 2) - (containerRect.left + containerRect.width / 2);
 			}
 			setTimeout(() => {
-				this.increments[index-1].scrollIntoView(this.snap);
+				this.increments[index].scrollIntoView(this.snap);
 			}, 10);
 		}
 
