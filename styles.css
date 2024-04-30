@@ -1,4 +1,6 @@
 :root {
+	--title-font: "Schroders Circular", schroders-circular, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	--text-font: "Schroders Circular", schroders-circular, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	--horizontal-margin: 1.5rem;
 	--top-margin: 6rem;
 	--bottom-margin: 7rem;
@@ -29,6 +31,7 @@
 	position: relative;
 	transition: background-color ease 500ms;
 	border-radius: 1rem;
+	font-family: var(--text-font);
 }
 
 [data-breakout="true"] {
@@ -318,7 +321,7 @@
 	background-repeat: no-repeat;
 	background-position: center left;
 	background-size: contain;
-	font-family: "Schroders Circular", schroders-circular, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-family: var(--title-font);
 	font-size: 3rem;
 	font-weight: 900;
 	line-height: 1;
