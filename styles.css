@@ -2,6 +2,7 @@
 	--horizontal-margin: 1.5rem;
 	--top-margin: 6rem;
 	--bottom-margin: 7rem;
+	--icon-info: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 15H11V9H9V15ZM10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM9 7H11V5H9V7Z" fill="white" fill-opacity="0.6"/></svg>');
 }
 
 @media only screen and (min-width:768px) {
@@ -148,16 +149,66 @@
 	z-index: 10;
 }
 
-.it-underlay img {
-	display: block;
+.it-underlay figure {
+	position: absolute;
 	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
-	opacity: 0;
+	padding: 0;
+	margin: 0;
 	transition: opacity ease 500ms;
+	opacity: 0;
+}
+
+.it-underlay img {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.it-underlay figcaption {
+	position: absolute;
+	left: 2rem;
+	bottom: 1rem;
+	right: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.it-caption {
+	text-align: left;
+	color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.875rem;
+	padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+	border-radius: 0.375rem;
+	background-color: #00000099;
+	text-shadow: 0 0 0.25rem #000000;
+}
+
+.it-caption:before {
+	display: inline-block;
+	content: "";
+	width: 1.25rem;
+	height: 1.25rem;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	background-image: var(--icon-info);
+}
+
+.it-credit {
+	text-align: right;
+	color: #FFFFFF;
+	font-size: 0.875rem;
+	padding: 0.25rem 0;
+	text-shadow: 0 0 0.25rem #000000;
 }
 
 [data-index="0"] [data-underlay="0"],
