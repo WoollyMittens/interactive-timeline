@@ -71,10 +71,12 @@ window.addEventListener("DOMContentLoaded", function() {
 			if (direction === 0) return;
 			const containerRect = this.container.getBoundingClientRect();
 			let increment = (direction > 0) ? -1 : 1;
-			let index = (increment < 0) ? this.increments.length : -1 ;
+			let index = (increment < 0) ? this.increments.length - 1 : -1 ;
 			let nearest = this.container.scrollWidth;
 			let distance = nearest;
-			while (Math.abs(distance) <= Math.abs(nearest)) {
+			let count = 0;
+			while (Math.abs(distance) <= Math.abs(nearest) && count < this.increments.length - 1) {
+				count++;
 				index = index + increment;
 				nearest = distance;
 				let incrementRect = this.increments[index].getBoundingClientRect();
@@ -83,6 +85,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					(incrementRect.left + incrementRect.width / 2) - (containerRect.left + containerRect.width / 2);
 			}
 			setTimeout(() => {
+				console.log(index, this.increments.length);
 				this.increments[index].scrollIntoView(this.snap);
 			}, 10);
 		}
