@@ -3,7 +3,7 @@
 	--text-font: "Schroders Circular", schroders-circular, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	--horizontal-margin: 1.5rem;
 	--top-margin: 6rem;
-	--bottom-margin: 7rem;
+	--bottom-margin: 11.25rem;;
 	--icon-info: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 15H11V9H9V15ZM10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM9 7H11V5H9V7Z" fill="white" fill-opacity="0.6"/></svg>');
 	--icon-fireworks: url('data:image/svg+xml;utf8,<svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M39.5814 60.2322C39.7594 59.5712 38.8099 33.3805 58.5117 24.9531" stroke="%23122A5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M35.2791 42.1632C35.1335 41.728 35.9103 24.4803 19.7907 18.9307" stroke="%23122A5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M33.5582 68.8376C33.3802 68.1927 34.3297 42.6407 14.6279 34.4189" stroke="%23122A5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M59.3175 44.0506L64.5349 46.4565L59.3175 48.8792L56.7824 54.2091L54.2639 48.8792L49.0465 46.4565L54.2639 44.0506L56.7824 38.7207L59.3175 44.0506Z" stroke="%237CC4CD" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.0243 50.9064L22.3721 52.9114L18.0243 54.9303L15.9118 59.3718L13.8128 54.9303L9.46509 52.9114L13.8128 50.9064L15.9118 46.4648L18.0243 50.9064Z" stroke="%237CC4CD" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.6732 12.8618L54.2093 16.3371L46.6732 19.8364L43.0114 27.5352L39.3733 19.8364L31.8372 16.3371L39.3733 12.8618L43.0114 5.16309L46.6732 12.8618Z" stroke="%237CC4CD" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7675 19.7907V14.6279" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.186 17.209H16.3488" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.46509 33.5583V28.3955" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.88373 30.9766H12.0465" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M49.0465 67.1159V61.9531" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.4651 64.5352H51.6279" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5349 24.9538V19.791" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9535 22.3721H67.1163" stroke="%237CC4CD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
@@ -12,7 +12,7 @@
 	:root {
 		--horizontal-margin: 2rem;
 		--top-margin: 8rem;
-		--bottom-margin: 7rem;
+		--bottom-margin: 11.25rem;
 	}
 }
 
@@ -20,7 +20,7 @@
 	:root {
 		--horizontal-margin: 3.75rem;
 		--top-margin: 10rem;
-		--bottom-margin: 8rem;
+		--bottom-margin: 9rem;
 	}
 }
 
@@ -49,7 +49,7 @@
 	display: flex;
 	overflow: auto;
 	scrollbar-width: none;
-	aspect-ratio: 3 / 4;
+	aspect-ratio: 6 / 10;
 	cursor: grab;
 	scroll-snap-type: x mandatory;
 	scroll-padding-left: var(--horizontal-margin);
@@ -63,7 +63,7 @@
 
 @media only screen and (min-width:768px) {
 	.it-slider {
-		aspect-ratio: 4 / 3;
+		aspect-ratio: 10 / 8;
 	}
 }
 
@@ -96,7 +96,7 @@
 	align-items: flex-start;
 	justify-content: space-around;
 	gap: 2rem;
-	margin: 1rem 0 0 0;
+	margin: 0;
 	padding: 0 2rem 0 0;
 	min-height: 16rem;
 	list-style: none;
