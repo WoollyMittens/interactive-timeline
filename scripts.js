@@ -85,7 +85,6 @@ window.addEventListener("DOMContentLoaded", function() {
 					(incrementRect.left + incrementRect.width / 2) - (containerRect.left + containerRect.width / 2);
 			}
 			setTimeout(() => {
-				console.log(index, this.increments.length);
 				this.increments[index].scrollIntoView(this.snap);
 			}, 10);
 		}
