@@ -121,7 +121,7 @@
 }
 
 .it-events li[data-variant="1"] {
-	background-color: #7CC4CDCC;
+	background-color: #B3DADED9;
 	color: #122A5D;
 }
 
@@ -478,7 +478,7 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
-	border: solid 3px transparent;
+	border: solid 3px #FFFFFF99;
 	border-radius: 0.5rem;
 }
 
@@ -499,5 +499,5 @@
 [data-index="7"] .it-thumbnail:nth-of-type(8):after,
 [data-index="8"] .it-thumbnail:nth-of-type(9):after,
 [data-index="9"] .it-thumbnail:nth-of-type(10):after {
-	border-color: #ffffff;
+	border-color: #FFFFFFFF;
 }
