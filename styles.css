@@ -57,6 +57,7 @@
 
 @media (pointer:fine) {
 	.it-slider {
+		overflow: hidden;
 		scroll-snap-type: initial;
 	}
 }
