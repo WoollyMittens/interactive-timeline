@@ -466,6 +466,14 @@
 	}
 }
 
+.it-overview:before,
+.it-overview:after {
+	display: inline-block;
+	content: "";
+	min-width: 6.25rem;
+	aspect-ratio: 10 / 6;
+}
+
 .it-thumbnail {
 	background-color: #fff;
 	min-width: 6.25rem;
