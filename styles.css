@@ -104,7 +104,7 @@
 }
 
 .it-events li {
-	background-color: #000000CC;
+	background-color: #000000D9;
 	color: #fff;
 	width: 21.75rem;
 	max-width: calc(100vw - 80px);
@@ -127,7 +127,7 @@
 }
 
 .it-events li[data-variant="2"] {
-	background-color: #FFFFFFCC;
+	background-color: #FFFFFFD9;
 	color: #122A5D;
 }
 
