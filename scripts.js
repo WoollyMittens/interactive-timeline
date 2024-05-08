@@ -176,6 +176,9 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 
 		get hasInteracted() {
+			setTimeout(() => {
+				this.instructions.parentNode.style.display = "none";
+			}, 1000);
 			return this.rootElement.hasAttribute('data-interacted');
 		}
 

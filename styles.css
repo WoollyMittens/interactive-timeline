@@ -305,8 +305,8 @@
 }
 
 [data-interacted] .it-instructions {
-	animation-delay: 300ms;
-	animation-duration: 300ms;
+	animation-delay: 500ms;
+	animation-duration: 500ms;
 	animation-name: slideout;
 	animation-fill-mode: forwards;
 	animation-timing-function: ease-in-out;
@@ -327,16 +327,13 @@
 
 @keyframes slideout {
 	from {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 		right: 0;
 	}
 
-	99% {
-		right: -15rem;
-	}
-
 	to {
-		right: -15rem;
-		display: none;
+		clip-path: polygon(0 0, 1px 0, 1px 100%, 0 100%);
+		right: -13rem;
 	}
 }
 
