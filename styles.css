@@ -467,19 +467,30 @@
 .it-overview:after {
 	display: inline-block;
 	content: "";
-	min-width: 6.25rem;
-	aspect-ratio: 10 / 6;
 }
 
 .it-thumbnail {
 	background-color: #fff;
-	min-width: 6.25rem;
-	aspect-ratio: 10 / 6;
 	box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.55);
 	border-radius: 0.5rem;
 	overflow: hidden;
 	position: relative;
 	cursor: pointer;
+}
+
+.it-overview:before,
+.it-overview:after,
+.it-thumbnail {
+	min-width: 5rem;
+	aspect-ratio: 10 / 6;
+}
+
+@media only screen and (min-width:1280px) {
+	.it-overview:before,
+	.it-overview:after,
+	.it-thumbnail {
+		min-width: 6.25rem;
+	}
 }
 
 .it-thumbnail:after {
