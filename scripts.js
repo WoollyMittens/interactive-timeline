@@ -121,7 +121,10 @@ window.addEventListener("DOMContentLoaded", function() {
 			this.addThumbnailControls();
 			this.importAnimation();
 
-			this.focusOnPage(this.sliderPages[this.closestIndex], true);
+			this.scrollMargin = 1.5 * 16;
+			if (matchMedia("(min-width:768px)").matches) this.scrollMargin = 2 * 16;
+			if (matchMedia("(min-width:992px)").matches) this.scrollMargin = 3.75 * 16;
+			this.sliderElement.scrollLeft = this.sliderPages[this.closestIndex].offsetLeft - this.scrollMargin;
 		}
 
 		addButtonControls() {
